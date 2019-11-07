@@ -1,0 +1,5 @@
+﻿  Source.c
+c:\users\madun\desktop\strukture podataka\vj3\vj3\source.c(316): warning C4098: 'procitaj_iz_datoteke': 'void' function returning a value
+c:\users\madun\desktop\strukture podataka\vj3\vj3\source.c(142): warning C4172: returning address of local variable or temporary: izbor
+  Vj3.vcxproj -> C:\Users\madun\Desktop\STRUKTURE PODATAKA\Vj3\Debug\Vj3.exe
+  Vj3.vcxproj -> C:\Users\madun\Desktop\STRUKTURE PODATAKA\Vj3\Debug\Vj3.pdb (Partial PDB)
