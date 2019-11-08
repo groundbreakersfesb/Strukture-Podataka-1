@@ -13,7 +13,7 @@ int unosStud(char * , int, student *);
 int main()
 {
 	int i, br,provjera;
-	student *s;
+	student *s = NULL;
 	char  imedat[30]="studenti.txt";
 
 	br = prebroji(imedat);
