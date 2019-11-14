@@ -2,11 +2,11 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-//5. Za dvije sortirane liste L1 i L2(mogu se proèitati iz datoteke ili unijeti ruèno, bitno je
-//	samo da su sortirane), napisati program koji stvara novu vezanu listu tako da raèuna :
+//5. Za dvije sortirane liste L1 i L2(mogu se proÃ¨itati iz datoteke ili unijeti ruÃ¨no, bitno je
+//	samo da su sortirane), napisati program koji stvara novu vezanu listu tako da raÃ¨una :
 //a) L1VL2,
 //b) L1^L2.
-//Liste osim pokazivaèa na slijedeæu strukturu imaju i jedan cjelobrojni element, po
+//Liste osim pokazivaÃ¨a na slijedeÃ¦u strukturu imaju i jedan cjelobrojni element, po
 //kojem su sortir
 
 #define list_foreach(p, head) for (p = head->next; p != NULL; p = p->next)
@@ -25,7 +25,8 @@ int sort(const Pozicija);
 int ispis(const Pozicija); 
 int unija(const Pozicija, const Pozicija, const Pozicija);
 int presjek(const Pozicija, const Pozicija, const Pozicija);
-
+int trazi(const Pozicija, int);
+		
 int main(void)
 {
 	
@@ -44,9 +45,14 @@ int main(void)
 
 	for (i = 0; i < br1; i++)
 	{
-		printf("\nUnesite %d. element", i + 1); 
+		printf("\nUnesite %d. element: ", i + 1); 
 		scanf("%d", &x); 
-
+		if (trazi(&Head1, x) != 0) {
+			printf("Ovaj element je vec unesen! Unesite novi: ");
+				i--;
+				continue;
+		}
+		
 		unos(&Head1, x); 
 	}
 
@@ -55,8 +61,14 @@ int main(void)
 
 	for (i = 0; i < br2; i++)
 	{
-		printf("\nUnesite %d. element", i + 1);
+		printf("\nUnesite %d. element: ", i + 1);
 		scanf("%d", &x);
+		if (trazi(&Head2, x) != 0) {
+			printf("Ovaj element je vec unesen! Unesite novi: ");
+			i--;
+			continue;
+		}
+		
 		unos(&Head2, x);
 	}
 
@@ -199,6 +211,17 @@ int presjek(const Pozicija Head1, const Pozicija Head2, const Pozicija Head3) {
 	}
 
 	sort(p3);
+
+	return 0;
+}
+int trazi(const Pozicija Head, int x) {
+
+	Pozicija p = Head->next;
+	while (p != NULL) {
+		if (p->el == x)
+			return 1;
+		p = p->next;
+	}
 
 	return 0;
 }
