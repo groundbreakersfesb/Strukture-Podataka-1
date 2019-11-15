@@ -11,53 +11,54 @@
 
 #define list_foreach(p, head) for (p = head->next; p != NULL; p = p->next)
 
-struct cvor; 
+struct cvor;
 
 typedef struct cvor *Pozicija;
 typedef struct cvor {
-		int el; 
-		Pozicija next; 
+	int el;
+	Pozicija next;
 
 }_cvor;
 
 int unos(const Pozicija, int);
-int sort(const Pozicija); 
-int ispis(const Pozicija); 
+int unosSortirano(const Pozicija Head, int x);
+int sort(const Pozicija);
+int ispis(const Pozicija);
 int unija(const Pozicija, const Pozicija, const Pozicija);
 int presjek(const Pozicija, const Pozicija, const Pozicija);
 int trazi(const Pozicija, int);
-		
+
 int main(void)
 {
-	
+
 	_cvor Head1, Head2, HeadU, HeadP;
 	int br1 = 0;
 	int br2 = 0;
 	int i, x;
-	Head1.next = NULL; 
+	Head1.next = NULL;
 	Head2.next = NULL;
 	HeadU.next = NULL;
 	HeadP.next = NULL;
 
-	
-	printf("Upisite broj elemenata prve liste:"); 
-	scanf("%d", &br1); 
+
+	printf("Upisite broj elemenata prve liste:");
+	scanf("%d", &br1);
 
 	for (i = 0; i < br1; i++)
 	{
-		printf("\nUnesite %d. element: ", i + 1); 
-		scanf("%d", &x); 
+		printf("\nUnesite %d. element: ", i + 1);
+		scanf(" %d", &x);
 		if (trazi(&Head1, x) != 0) {
 			printf("Ovaj element je vec unesen! Unesite novi: ");
-				i--;
-				continue;
+			i--;
+			continue;
 		}
-		
-		unos(&Head1, x); 
+
+		unosSortirano(&Head1, x);
 	}
 
 	printf("Upisite broj elemenata druge liste:");
-	scanf("%d", &br2);
+	scanf(" %d", &br2);
 
 	for (i = 0; i < br2; i++)
 	{
@@ -68,15 +69,12 @@ int main(void)
 			i--;
 			continue;
 		}
-		
-		unos(&Head2, x);
+
+		unosSortirano(&Head2, x);
 	}
 
-	sort(&Head1); 
-	sort(&Head2); 
-
-	printf("\nLista 1: "); 
-	ispis(&Head1); 
+	printf("\nLista 1: ");
+	ispis(&Head1);
 
 	printf("\nLista 2: ");
 	ispis(&Head2);
@@ -89,68 +87,55 @@ int main(void)
 	printf("\nPresjek: ");
 	ispis(&HeadP);
 
-	getchar(); 
-	getchar(); 
-	return 0; 
+	getchar();
+	getchar();
+	return 0;
 
 }
 
 int unos(const Pozicija Head, int x)
 {
-	Pozicija q; 
+	Pozicija q;
 	Pozicija p;
 	p = Head;
 
-	q = (Pozicija)malloc(sizeof(_cvor)); 
+	q = (Pozicija)malloc(sizeof(_cvor));
 
-	if (q == NULL) return -1; 
+	if (q == NULL) return -1;
 
-	q->el = x; 
-	q->next=p->next; 
-	p->next = q; 
+	q->el = x;
+	q->next = p->next;
+	p->next = q;
 
 	return 0;
 }
 
-int sort(const Pozicija head)
+int unosSortirano(const Pozicija Head, int x)
 {
-	Pozicija p = head;
-	Pozicija j, prev_j, temp, end;
-	end = NULL;
+	Pozicija it = Head;
 
-	while (p->next != end) {
-
-		prev_j = p;
-		j = p->next;
-
-		while (j->next != end) {
-
-			if (j->el > j->next->el) {
-
-				temp = j->next;
-				prev_j->next = temp;
-				j->next = temp->next;
-				temp->next = j;
-
-				j = temp;
-			}
-
-			prev_j = j;
-			j = j->next;
-
+	for (; it->next != NULL; it = it->next)
+	{
+		if (it->next->el == x)
+		{
+			// Vec postoji, ne radi nista, izadji iz funkcije o d m a h
+			return 0;
 		}
 
-		end = j;
+
+		if (it->next->el < x)
+		{
+			break;
+		}
 	}
 
-	return 0; 
+	return unos(it, x);
 }
 
 int ispis(const Pozicija Head)
 {
-	Pozicija p; 
+	Pozicija p;
 	p = Head->next;
-
 
 	for (p = Head->next; p != NULL; p = p->next)
 	{
@@ -165,26 +150,12 @@ int unija(const Pozicija Head1, const Pozicija Head2, const Pozicija Head3) {
 	Pozicija p1;
 	Pozicija p2;
 	Pozicija p3 = Head3;
-	int test = 1;
 
 	for (p1 = Head1->next; p1 != NULL; p1 = p1->next)
-		unos(p3, p1->el);
-
-	for (p2 = Head2->next; p2 != NULL; p2 = p2->next) {
-		for (p1 = Head1->next; p1 != NULL; p1 = p1->next)
-			if (p2->el == p1->el)
-			{
-				test = 0;
-				break;
-			}
-
-		if (test)
-			unos(p3, p2->el);
-		test = 1;
-
-	}
-
-	sort(p3);
+		unosSortirano(p3, p1->el);
+	
+	for (p2 = Head2->next; p2 != NULL; p2 = p2->next)
+		unosSortirano(p3, p2->el);
 
 	return 0;
 }
@@ -194,23 +165,14 @@ int presjek(const Pozicija Head1, const Pozicija Head2, const Pozicija Head3) {
 	Pozicija p1;
 	Pozicija p2;
 	Pozicija p3 = Head3;
-	int test = 1;
 
 	for (p2 = Head2->next; p2 != NULL; p2 = p2->next) {
 		for (p1 = Head1->next; p1 != NULL; p1 = p1->next)
 			if (p2->el == p1->el)
 			{
-				test = 0;
-				break;
+				unosSortirano(p3, p2->el);
 			}
-
-		if (!test)
-			unos(p3, p2->el);
-		test = 1;
-
 	}
-
-	sort(p3);
 
 	return 0;
 }
