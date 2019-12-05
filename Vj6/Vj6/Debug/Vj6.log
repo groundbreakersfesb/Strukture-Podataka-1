@@ -1,0 +1,4 @@
+﻿  Source.c
+c:\users\madun\desktop\strukture podataka\vj6\vj6\source.c(31): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Vj6.vcxproj -> C:\Users\madun\Desktop\STRUKTURE PODATAKA\Vj6\Debug\Vj6.exe
+  Vj6.vcxproj -> C:\Users\madun\Desktop\STRUKTURE PODATAKA\Vj6\Debug\Vj6.pdb (Partial PDB)
