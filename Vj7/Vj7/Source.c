@@ -25,7 +25,7 @@ int citaj(const Stog, const char *);
 int main(void) {
 
 	_broj Head;
-	Head.next == NULL;
+	Head.next = NULL;
 	char ime[30] = "postfix.txt";
 	int x = 0;
 
