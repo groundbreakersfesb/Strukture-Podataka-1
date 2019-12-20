@@ -188,9 +188,11 @@ bool MD(StabloPtr parent, char *Ime) {
 
 	dir = (StabloPtr)malloc(sizeof(_stablo));
 
-	if (!dir) return false;
+	if (!dir->ime) return false;
+	
+	dir->ime = (char *)calloc((strlen(Ime) + 1), sizeof(char));
 
-	dir->ime = Ime;
+	strcpy(dir->ime, Ime);
 	dir->child = NULL;
 	dir->sibling = NULL;
 
