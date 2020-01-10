@@ -220,7 +220,7 @@ void print(StogPtr p)
 
 }
 
-StabloPtr CdDir(StogPtr stack, StabloPtr p, StabloPtr q, char * name) {		//Greska u stogu
+StabloPtr CdDir(StogPtr stack, StabloPtr p, StabloPtr q, char * name) {		
 
 	bool imaDijete = false;
 
