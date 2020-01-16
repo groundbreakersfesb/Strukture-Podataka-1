@@ -1,0 +1,4 @@
+﻿  Source.c
+c:\users\madun\desktop\strukture podataka\vj11\vj11\source.c(30): warning C4091: 'typedef ': ignored on left of 'HashT' when no variable is declared
+  Vj11.vcxproj -> C:\Users\madun\Desktop\STRUKTURE PODATAKA\Vj11\Debug\Vj11.exe
+  Vj11.vcxproj -> C:\Users\madun\Desktop\STRUKTURE PODATAKA\Vj11\Debug\Vj11.pdb (Partial PDB)
